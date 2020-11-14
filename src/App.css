@@ -7,10 +7,11 @@
 :root {
   --highlight-color: #61dbfb;
   --contrast-dark: #282c34;
+  --contrast-darker: #232730;
   --fontFamily: 'Poppins', sans-serif;
 }
 
-.App {
+.QuestionsApp {
   text-align: center;
   height: 90vh;
   background-color: var(--contrast-dark);
@@ -20,7 +21,23 @@
   justify-content: space-evenly;
   padding: 30px;
 }
-
+.Navbar {
+  background-color: var(--contrast-darker);
+  padding: 0px 30px;
+  height: 10vh;
+  border-bottom: 1px solid #888;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav a {
+  color: var(--highlight-color);
+  text-decoration: none;
+}
+.logo {
+  font-size: 1.5rem;
+  color: var(--highlight-color);
+}
 .QuestionCard {
   width: 100%;
   padding: 10px;
@@ -43,6 +60,12 @@
   border-radius: 5px;
   outline: none;
   border: none;
+}
+.CtaContainer {
+  display: flex;
+  width: 500px;
+  justify-content: space-around;
+  align-items: center;
 }
 
 @keyframes App-logo-spin {
