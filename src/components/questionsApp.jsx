@@ -3,10 +3,6 @@ import QuestionCard from './questionCard';
 import CtaContainer from './ctaContainer';
 
 function QuestionsApp() {
-  const [questions, setQuestions] = React.useState({
-    questionsAsked: [],
-    currentQuestion: '',
-  });
   const questionPool = [
     'What is your favorite animal?',
     'What is your favorite food?',
@@ -16,19 +12,48 @@ function QuestionsApp() {
     'What is your favorite color?',
     'What is your favorite movie?',
     'What is your favorite TV show?',
+    'Who is your favorite actor/actress?',
   ];
 
+  const shuffle = (array) => {
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  };
+
+  const [questions, setQuestions] = React.useState({
+    questionsAsked: shuffle(questionPool),
+    currentQuestion: '',
+  });
+
   const handleNextQuestion = (questions) => {
-    while (questions.questionsAsked.length < questionPool.length) {
-      const randomIndex = Math.floor(Math.random() * questionPool.length);
-      const randomQuestion = questionPool[randomIndex];
-      if (questions.questionsAsked.indexOf(randomQuestion) === -1) {
-        const newState = {
-          questionsAsked: [...questions.questionsAsked, randomQuestion],
-          currentQuestion: randomQuestion,
-        };
-        setQuestions(newState);
-        return;
+    if (questions.currentQuestion === '') {
+      setQuestions({
+        ...questions,
+        currentQuestion: questions.questionsAsked[0],
+      });
+    } else {
+      const currentIndex = questions.questionsAsked.indexOf(
+        questions.currentQuestion
+      );
+      if (currentIndex < questions.questionsAsked.length - 1) {
+        setQuestions({
+          ...questions,
+          currentQuestion: questions.questionsAsked[currentIndex + 1],
+        });
       }
     }
   };
@@ -37,7 +62,10 @@ function QuestionsApp() {
     console.log(currentIndex);
   };
   const allQuestionsAsked =
-    questions.questionsAsked.length === questionPool.length ? true : false;
+    questions.questionsAsked.length - 1 ===
+    questions.questionsAsked.indexOf(questions.currentQuestion)
+      ? true
+      : false;
   return (
     <div className='QuestionsApp'>
       <QuestionCard question={questions.currentQuestion} />
