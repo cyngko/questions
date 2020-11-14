@@ -58,23 +58,37 @@ function QuestionsApp() {
     }
   };
   const handlePreviousQuestion = () => {
-    const currentIndex = questionPool.indexOf(questions.currentQuestion);
-    console.log(currentIndex);
+    const currentIndex = questions.questionsAsked.indexOf(
+      questions.currentQuestion
+    );
+    if (currentIndex !== 0 || questions.currentQuestion !== '') {
+      setQuestions({
+        ...questions,
+        currentQuestion: questions.questionsAsked[currentIndex - 1],
+      });
+    }
   };
-  const allQuestionsAsked =
+
+  const nextBtnDisabled =
     questions.questionsAsked.length - 1 ===
     questions.questionsAsked.indexOf(questions.currentQuestion)
+      ? true
+      : false;
+  const prevBtnDisabled =
+    questions.questionsAsked.indexOf(questions.currentQuestion) <= 0
       ? true
       : false;
   return (
     <div className='QuestionsApp'>
       <QuestionCard question={questions.currentQuestion} />
       <CtaContainer
-        onHandleClick={() => handleNextQuestion(questions)}
-        isDisabled={allQuestionsAsked}
+        onHandleNextQuestion={() => handleNextQuestion(questions)}
+        onHandlePreviousQuestion={() => handlePreviousQuestion(questions)}
+        isNextDisabled={nextBtnDisabled}
+        isPrevDisabled={prevBtnDisabled}
       />
 
-      {allQuestionsAsked && (
+      {nextBtnDisabled && (
         <p
           style={{
             color: '#282c34',

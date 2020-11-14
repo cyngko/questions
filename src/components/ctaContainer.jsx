@@ -1,7 +1,12 @@
 import React from 'react';
 import CtaBtn from './ctaBtn';
 
-export default function CtaContainer({ onHandleClick, isDisabled }) {
+export default function CtaContainer({
+  onHandleNextQuestion,
+  onHandlePreviousQuestion,
+  isNextDisabled,
+  isPrevDisabled,
+}) {
   const prevArrow = (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -41,14 +46,14 @@ export default function CtaContainer({ onHandleClick, isDisabled }) {
       <CtaBtn
         cta={prevArrow}
         aria-label='Previous'
-        onHandleClick={onHandleClick}
-        isDisabled={isDisabled}
+        onHandleClick={onHandlePreviousQuestion}
+        isDisabled={isPrevDisabled}
       />
       <CtaBtn
         cta={nextArrow}
         aria-label='Next'
-        onHandleClick={onHandleClick}
-        isDisabled={isDisabled}
+        onHandleClick={onHandleNextQuestion}
+        isDisabled={isNextDisabled}
       />
     </div>
   );
