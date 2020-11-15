@@ -12,7 +12,9 @@ function QuestionsApp() {
     'What is your favorite color?',
     'What is your favorite movie?',
     'What is your favorite TV show?',
-    'Who is your favorite actor/actress?',
+    'Who is your favorite actor / actress?',
+    'What is your favorite song at the moment?',
+    'What was the last concert you have been to?',
   ];
 
   const shuffle = (array) => {
