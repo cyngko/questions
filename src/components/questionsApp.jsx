@@ -15,6 +15,12 @@ function QuestionsApp() {
     'Who is your favorite actor / actress?',
     'What is your favorite song at the moment?',
     'What was the last concert you have been to?',
+    'Beach or mountains?',
+    'Do you want to have kids in the future?',
+    'Who was your teenage crush?',
+    'Tea or Coffee?',
+    'What is something you are proud of?',
+    'Which power ranger was your favorite?',
   ];
 
   const shuffle = (array) => {
